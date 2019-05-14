@@ -2,32 +2,30 @@ package com.sprint.crm.pojo;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class User {
-    private Integer userId;
+	private Integer userId;
+	private String loginName;
+	private String password;
+	private String isLockout;
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+	private Date lastLoginTime;
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+	private Date createTime;
+	private Integer psdWrongTime;
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+	private Date lockTime;
 
-    private String loginName;
+	private String protectEmail;
 
-    private String password;
+	private String protectTel;
 
-    private String isLockout;
+	private String allotSetting;
 
-    private Date lastLoginTime;
+	private String signInState;
 
-    private Date createTime;
-
-    private Integer psdWrongTime;
-
-    private Date lockTime;
-
-    private String protectEmail;
-
-    private String protectTel;
-
-    private String allotSetting;
-
-    private String signInState;
-
-    private Integer weight;
+	private Integer weight;
 
 	public User() {
 		super();
@@ -157,6 +155,12 @@ public class User {
 		this.weight = weight;
 	}
 
+	public User(String loginName, String password) {
+		super();
+		this.loginName = loginName;
+		this.password = password;
+	}
+
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", loginName=" + loginName + ", password=" + password + ", isLockout="
@@ -166,5 +170,4 @@ public class User {
 				+ "]";
 	}
 
-   
 }

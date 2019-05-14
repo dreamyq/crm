@@ -1,18 +1,20 @@
 package com.sprint.crm.pojo;
 
-public class Userroles {
+public class UserRoles {
     private Integer id;
 
     private Integer userId;
 
     private Integer roleId;
 
-	public Userroles() {
+	
+	
+
+	public UserRoles() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public Userroles(Integer id, Integer userId, Integer roleId) {
+	public UserRoles(Integer id, Integer userId, Integer roleId) {
 		super();
 		this.id = id;
 		this.userId = userId;

@@ -1,49 +1,138 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.sprint.crm.mapper.RolesMapper" >
-  <resultMap id="BaseResultMap" type="com.sprint.crm.pojo.Roles" >
-    <id column="role_id" property="roleId" jdbcType="INTEGER" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    role_id, name
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from roles
-    where role_id = #{roleId,jdbcType=INTEGER}
-  </select>
- 
- 
-  <insert id="insertSelective" parameterType="com.sprint.crm.pojo.Roles" >
-    insert into roles
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="roleId != null" >
-        role_id,
-      </if>
-      <if test="name != null" >
-        name,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="roleId != null" >
-        #{roleId,jdbcType=INTEGER},
-      </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
- 
-  <update id="updateByPrimaryKeySelective" parameterType="com.sprint.crm.pojo.Roles" >
-    update roles
-    <set >
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where role_id = #{roleId,jdbcType=INTEGER}
-  </update>
-  
+<mapper namespace="com.sprint.crm.mapper.RolesMapper">
+	
+	<resultMap id="BaseResultMap1" type="com.sprint.crm.pojo.User">
+		<id column="user_id" property="userId" jdbcType="INTEGER" />
+		<result column="login_name" property="loginName" jdbcType="VARCHAR" />
+		<result column="password" property="password" jdbcType="VARCHAR" />
+		<result column="is_lockout" property="isLockout" jdbcType="VARCHAR" />
+		<result column="last_login_time" property="lastLoginTime"
+			jdbcType="TIMESTAMP" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="psd_wrong_time" property="psdWrongTime"
+			jdbcType="INTEGER" />
+		<result column="lock_time" property="lockTime" jdbcType="TIMESTAMP" />
+		<result column="protect_email" property="protectEmail"
+			jdbcType="VARCHAR" />
+		<result column="protect_tel" property="protectTel" jdbcType="VARCHAR" />
+		<result column="allot_setting" property="allotSetting"
+			jdbcType="VARCHAR" />
+		<result column="sign_in_state" property="signInState" jdbcType="VARCHAR" />
+		<result column="weight" property="weight" jdbcType="INTEGER" />
+	</resultMap>
+	<resultMap id="BaseResultMap" type="com.sprint.crm.pojo.Roles">
+		<id column="role_id" property="roleId" jdbcType="INTEGER" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap id="BaseResultMap2" type="com.sprint.crm.pojo.Modules">
+		<id column="module_id" property="moduleId" jdbcType="INTEGER" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="parent_id" property="parentId" jdbcType="INTEGER" />
+		<result column="path" property="path" jdbcType="VARCHAR" />
+		<result column="weight" property="weight" jdbcType="INTEGER" />
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		role_id, name
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from roles
+		where role_id = #{roleId,jdbcType=INTEGER}
+	</select>
+
+
+	<insert id="insertSelective" parameterType="com.sprint.crm.pojo.Roles">
+		insert into roles
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="roleId != null">
+				role_id,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="roleId != null">
+				#{roleId,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.sprint.crm.pojo.Roles">
+		update roles
+		<set>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where role_id = #{roleId,jdbcType=INTEGER}
+	</update>
+
+	
+	<select id="getPage" resultMap="BaseResultMap" parameterType="RolesPageBean">
+		select * from roles
+		<where>
+			<if test="name!='' and name!=null">
+				and name like "%"#{name}"%"
+			</if>
+		</where>
+		limit #{start},#{rows}
+	</select>
+
+	<select id="getSum" resultType="int" parameterType="RolesPageBean">
+		select count(*) from roles
+		<where>
+			<if test="name!='' and name!=null">
+				and name like "%"#{name}"%"
+			</if>
+		</where>
+	</select>
+	<select id="getUserByRname" parameterType="string" resultMap="BaseResultMap1">
+		SELECT u.* FROM `user` u,roles r,userroles ur WHERE
+		u.user_id=ur.user_id and
+		r.role_id=ur.role_id and r.name=#{rName}
+	</select>
+	<!--查询角色的ID -->
+	<select id="getRIdByRname" parameterType="string" resultType="int">
+		SELECT role_id FROM roles where name=#{rName}
+	</select>
+	<!--添加角色 -->
+	<insert id="addRole">
+		insert into roles(role_id,name) values(0,#{name})
+	</insert>
+	<!--更新角色 -->
+	<update id="updateRole">
+		update roles set name=#{name} where role_id=#{roleId}
+	</update>
+	<!--删除角色 -->
+	<delete id="dele">
+		delete from roles where role_id=#{roleId}
+	</delete>
+	<!--查询角色拥有的模块 -->
+	<select id="getUserByRole" resultMap="BaseResultMap2"
+		parameterType="int">
+		select * from modules where module_id in(select
+		module_id from rolemodules where role_id=#{roleId})
+	</select>
+	<!-- 删除角色所有权限 -->
+	<delete id="delAllRoles">
+		DELETE
+		FROM
+		rolemodules
+		WHERE
+		role_id = #{arg0}
+	</delete>
+	<!-- 角色添加权限 -->
+	<insert id="setRoles">
+		INSERT INTO rolemodules
+		VALUES(null,#{arg0},#{arg1})
+	</insert>
+
 </mapper>

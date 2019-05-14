@@ -1,166 +1,323 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.sprint.crm.mapper.UserMapper" >
-  <resultMap id="BaseResultMap" type="com.sprint.crm.pojo.User" >
-    <id column="user_id" property="userId" jdbcType="INTEGER" />
-    <result column="login_name" property="loginName" jdbcType="VARCHAR" />
-    <result column="password" property="password" jdbcType="VARCHAR" />
-    <result column="is_lockout" property="isLockout" jdbcType="VARCHAR" />
-    <result column="last_login_time" property="lastLoginTime" jdbcType="TIMESTAMP" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="psd_wrong_time" property="psdWrongTime" jdbcType="INTEGER" />
-    <result column="lock_time" property="lockTime" jdbcType="TIMESTAMP" />
-    <result column="protect_email" property="protectEmail" jdbcType="VARCHAR" />
-    <result column="protect_tel" property="protectTel" jdbcType="VARCHAR" />
-    <result column="allot_setting" property="allotSetting" jdbcType="VARCHAR" />
-    <result column="sign_in_state" property="signInState" jdbcType="VARCHAR" />
-    <result column="weight" property="weight" jdbcType="INTEGER" />
-  </resultMap>
-  
-    <sql id="Base_Column_List" >
-    user_id, login_name, password, is_lockout, last_login_time, create_time, psd_wrong_time, 
-    lock_time, protect_email, protect_tel, allot_setting, sign_in_state, weight
-  </sql>
-  
-  	
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from user
-    where user_id = #{userId,jdbcType=INTEGER}
-  </select>
- 
-  
-  <insert id="insertSelective" parameterType="com.sprint.crm.pojo.User" >
-    insert into user
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="userId != null" >
-        user_id,
-      </if>
-      <if test="loginName != null" >
-        login_name,
-      </if>
-      <if test="password != null" >
-        password,
-      </if>
-      <if test="isLockout != null" >
-        is_lockout,
-      </if>
-      <if test="lastLoginTime != null" >
-        last_login_time,
-      </if>
-      <if test="createTime != null" >
-        create_time,
-      </if>
-      <if test="psdWrongTime != null" >
-        psd_wrong_time,
-      </if>
-      <if test="lockTime != null" >
-        lock_time,
-      </if>
-      <if test="protectEmail != null" >
-        protect_email,
-      </if>
-      <if test="protectTel != null" >
-        protect_tel,
-      </if>
-      <if test="allotSetting != null" >
-        allot_setting,
-      </if>
-      <if test="signInState != null" >
-        sign_in_state,
-      </if>
-      <if test="weight != null" >
-        weight,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="userId != null" >
-        #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="loginName != null" >
-        #{loginName,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null" >
-        #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="isLockout != null" >
-        #{isLockout,jdbcType=VARCHAR},
-      </if>
-      <if test="lastLoginTime != null" >
-        #{lastLoginTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="psdWrongTime != null" >
-        #{psdWrongTime,jdbcType=INTEGER},
-      </if>
-      <if test="lockTime != null" >
-        #{lockTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="protectEmail != null" >
-        #{protectEmail,jdbcType=VARCHAR},
-      </if>
-      <if test="protectTel != null" >
-        #{protectTel,jdbcType=VARCHAR},
-      </if>
-      <if test="allotSetting != null" >
-        #{allotSetting,jdbcType=VARCHAR},
-      </if>
-      <if test="signInState != null" >
-        #{signInState,jdbcType=VARCHAR},
-      </if>
-      <if test="weight != null" >
-        #{weight,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
- 
-  <update id="updateByPrimaryKeySelective" parameterType="com.sprint.crm.pojo.User" >
-    update user
-    <set >
-      <if test="loginName != null" >
-        login_name = #{loginName,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null" >
-        password = #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="isLockout != null" >
-        is_lockout = #{isLockout,jdbcType=VARCHAR},
-      </if>
-      <if test="lastLoginTime != null" >
-        last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="psdWrongTime != null" >
-        psd_wrong_time = #{psdWrongTime,jdbcType=INTEGER},
-      </if>
-      <if test="lockTime != null" >
-        lock_time = #{lockTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="protectEmail != null" >
-        protect_email = #{protectEmail,jdbcType=VARCHAR},
-      </if>
-      <if test="protectTel != null" >
-        protect_tel = #{protectTel,jdbcType=VARCHAR},
-      </if>
-      <if test="allotSetting != null" >
-        allot_setting = #{allotSetting,jdbcType=VARCHAR},
-      </if>
-      <if test="signInState != null" >
-        sign_in_state = #{signInState,jdbcType=VARCHAR},
-      </if>
-      <if test="weight != null" >
-        weight = #{weight,jdbcType=INTEGER},
-      </if>
-    </set>
-    where user_id = #{userId,jdbcType=INTEGER}
-  </update> 
-  
-  <select id="selectZiXunShis" resultType="com.sprint.crm.pojo.User">
-  	select * from userroles ul,`user` u where u.user_id = ul.user_id and ul.role_id = (select r.role_id from roles r where r.name = #{name})
-  </select>
+<mapper namespace="com.sprint.crm.mapper.UserMapper">
+
+
+	<sql id="Base_Column_List">
+		user_id, login_name, password, is_lockout, last_login_time,
+		create_time,
+		psd_wrong_time,
+		lock_time, protect_email, protect_tel,
+		allot_setting, sign_in_state, weight
+	</sql>
+
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from user
+		where user_id = #{userId,jdbcType=INTEGER}
+	</select>
+
+
+	<insert id="insertSelective" parameterType="com.sprint.crm.pojo.User">
+		insert into user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="loginName != null">
+				login_name,
+			</if>
+			<if test="password != null">
+				password,
+			</if>
+			<if test="isLockout != null">
+				is_lockout,
+			</if>
+			<if test="lastLoginTime != null">
+				last_login_time,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="psdWrongTime != null">
+				psd_wrong_time,
+			</if>
+			<if test="lockTime != null">
+				lock_time,
+			</if>
+			<if test="protectEmail != null">
+				protect_email,
+			</if>
+			<if test="protectTel != null">
+				protect_tel,
+			</if>
+			<if test="allotSetting != null">
+				allot_setting,
+			</if>
+			<if test="signInState != null">
+				sign_in_state,
+			</if>
+			<if test="weight != null">
+				weight,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="userId != null">
+				#{userId,jdbcType=INTEGER},
+			</if>
+			<if test="loginName != null">
+				#{loginName,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				#{password,jdbcType=VARCHAR},
+			</if>
+			<if test="isLockout != null">
+				#{isLockout,jdbcType=VARCHAR},
+			</if>
+			<if test="lastLoginTime != null">
+				#{lastLoginTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="psdWrongTime != null">
+				#{psdWrongTime,jdbcType=INTEGER},
+			</if>
+			<if test="lockTime != null">
+				#{lockTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="protectEmail != null">
+				#{protectEmail,jdbcType=VARCHAR},
+			</if>
+			<if test="protectTel != null">
+				#{protectTel,jdbcType=VARCHAR},
+			</if>
+			<if test="allotSetting != null">
+				#{allotSetting,jdbcType=VARCHAR},
+			</if>
+			<if test="signInState != null">
+				#{signInState,jdbcType=VARCHAR},
+			</if>
+			<if test="weight != null">
+				#{weight,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.sprint.crm.pojo.User">
+		update user
+		<set>
+			<if test="loginName != null">
+				login_name = #{loginName,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				password = #{password,jdbcType=VARCHAR},
+			</if>
+			<if test="isLockout != null">
+				is_lockout = #{isLockout,jdbcType=VARCHAR},
+			</if>
+			<if test="lastLoginTime != null">
+				last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="psdWrongTime != null">
+				psd_wrong_time = #{psdWrongTime,jdbcType=INTEGER},
+			</if>
+			<if test="lockTime != null">
+				lock_time = #{lockTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="protectEmail != null">
+				protect_email = #{protectEmail,jdbcType=VARCHAR},
+			</if>
+			<if test="protectTel != null">
+				protect_tel = #{protectTel,jdbcType=VARCHAR},
+			</if>
+			<if test="allotSetting != null">
+				allot_setting = #{allotSetting,jdbcType=VARCHAR},
+			</if>
+			<if test="signInState != null">
+				sign_in_state = #{signInState,jdbcType=VARCHAR},
+			</if>
+			<if test="weight != null">
+				weight = #{weight,jdbcType=INTEGER},
+			</if>
+		</set>
+		where user_id = #{userId,jdbcType=INTEGER}
+	</update>
+
+	<select id="selectZiXunShis" resultType="com.sprint.crm.pojo.User">
+		select * from userroles
+		ul,`user` u where u.user_id = ul.user_id and
+		ul.role_id = (select
+		r.role_id from roles r where r.name = #{name})
+	</select>
+
+	<select id="validatePassword" resultType="com.sprint.crm.pojo.User">
+		select * from user
+		where login_name = #{loginName} and `password` =
+		#{password}
+	</select>
+
+	<update id="changePassword">
+		update user set password = #{password} where
+		login_name = #{loginName}
+	</update>
+
+	<resultMap id="BaseResultMap" type="com.sprint.crm.pojo.User">
+		<id column="user_id" property="userId" jdbcType="INTEGER" />
+		<result column="login_name" property="loginName" jdbcType="VARCHAR" />
+		<result column="password" property="password" jdbcType="VARCHAR" />
+		<result column="is_lockout" property="isLockout" jdbcType="VARCHAR" />
+		<result column="last_login_time" property="lastLoginTime"
+			jdbcType="TIMESTAMP" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="psd_wrong_time" property="psdWrongTime"
+			jdbcType="INTEGER" />
+		<result column="lock_time" property="lockTime" jdbcType="TIMESTAMP" />
+		<result column="protect_email" property="protectEmail"
+			jdbcType="VARCHAR" />
+		<result column="protect_tel" property="protectTel" jdbcType="VARCHAR" />
+		<result column="allot_setting" property="allotSetting"
+			jdbcType="VARCHAR" />
+		<result column="sign_in_state" property="signInState" jdbcType="VARCHAR" />
+		<result column="weight" property="weight" jdbcType="INTEGER" />
+	</resultMap>
+	<resultMap id="BaseResultMap1" type="com.sprint.crm.pojo.Roles">
+		<id column="role_id" property="roleId" jdbcType="INTEGER" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+	</resultMap>
+	<!--分页 -->
+	<select id="getPage" resultMap="BaseResultMap" parameterType="PageBean">
+		select * from user
+		<where>
+			<if test="loginName!='' and loginName!=null">
+				and login_name like "%"#{loginName}"%"
+			</if>
+			<if test="isLockout!='' and isLockout!=null">
+				and is_lockout = #{isLockout}
+			</if>
+			<if test="create1!='' and create1!=null and create2!='' and create2!=null">
+				and create_time BETWEEN #{create1} AND #{create2}
+			</if>
+		</where>
+		limit #{start},#{rows}
+	</select>
+	<!--总条数 -->
+	<select id="getSum" resultType="int" parameterType="PageBean">
+		select count(*) from user
+		<where>
+			<if test="loginName!='' and loginName!=null">
+				and login_name like "%"#{loginName}"%"
+			</if>
+			<if test="isLockout!='' and isLockout!=null">
+				and is_lockout like "%"#{isLockout}"%"
+			</if>
+			<if test="create1!='' and create1!=null and create2!='' and create2!=null">
+				and create_time BETWEEN #{create1} AND #{create2}
+			</if>
+		</where>
+	</select>
+	<!--添加用户角色 -->
+	<insert id="addUserRole" parameterType="int">
+		insert into
+		userroles(id,user_id,role_id)
+		values(null,#{arg0},#{arg1})
+	</insert>
+	<!--登录用户 -->
+	<select id="getUserByNameAndPwd" resultMap="BaseResultMap"
+		parameterType="string">
+		select * from user where login_name = #{loginName}
+	</select>
+	<!--查询角色名称 -->
+	<select id="getRoleNamesByUserId" parameterType="int"
+		resultType="string">
+		select `name`
+		from roles r join userroles ur on
+		r.role_id=ur.role_id
+		where
+		ur.user_id=#{userId}
+	</select>
+	<!--如果密码错误修改密码错误次数 -->
+	<update id="updatePsdWrongTimeByPassword1" parameterType="string">
+		update
+		user set psd_wrong_time= psd_wrong_time+1 where
+		login_name=#{loginName}
+	</update>
+	<!--解锁用户 -->
+	<update id="updateLockByUn" parameterType="string">
+		update
+		user set
+		psd_wrong_time= 0,is_lockout='否' where
+		login_name=#{loginName}
+	</update>
+	<!--锁定用户 -->
+	<update id="updateIsLockOutAndTime" parameterType="string">
+		update
+		user set
+		is_lockout='是',lock_time=CURRENT_TIMESTAMP where
+		login_name=#{loginName}
+	</update>
+
+	<!--锁定用户 -->
+	<update id="updateLock" parameterType="int">
+		update user set
+		is_lockout='是' where user_id = #{userId}
+	</update>
+	<!--解锁用户 -->
+	<update id="updateUnLock" parameterType="int">
+		update user set
+		is_lockout='否' where user_id = #{userId}
+	</update>
+	<!-- -->
+	<select id="selectRole" resultMap="BaseResultMap1">
+		SELECT * from roles
+	</select>
+	<!--查询用户所拥有的角色 -->
+	<select id="selectUserRole" parameterType="int" resultMap="BaseResultMap1">
+		SELECT * from roles where role_id in(SELECT role_id FROM userroles
+		where
+		user_id = #{userId})
+	</select>
+	<!--查询用户锁定状态 -->
+	<select id="getUserLockById" parameterType="int" resultType="string">
+		select is_lockout from user where user_id=#{userId}
+	</select>
+	<!--添加用户 -->
+	<insert id="insertUser">
+		INSERT INTO
+		user(user_id,login_name,password,is_lockout,create_time,protect_email,protect_tel)
+		VALUES(0,#{loginName},#{password},#{isLockout},#{createTime},#{protectEmail},#{protectTel})
+	</insert>
+	<!--更新除用户 -->
+	<update id="updateUser">
+		update user set
+		login_name=#{loginName},password=#{password},is_lockout=#{isLockout},create_time=#{createTime},protect_email=#{protectEmail},protect_tel=#{protectTel}
+		where user_id=#{userId}
+	</update>
+	<!--删除用户 -->
+	<delete id="delUser">
+		delete from user where user_id =#{userId}
+	</delete>
+	<!--更新用户最后登录的时间 -->
+	<update id="updateUserLastLoginTime" parameterType="int">
+		update user
+		set last_login_time=now() where user_id=#{userId}
+	</update>
+	<!--获取用户角色信息 -->
+	<select id="getUserRoleById" resultMap="BaseResultMap1">
+		select * from userroles where user_id = #{arg0} and role_id = #{arg1}
+	</select>
+	<!--删除用户角色 -->
+	<delete id="delUserRole" parameterType="int">
+		delete from userroles
+		where user_id = #{arg0} and role_id = #{arg1}
+	</delete>
+
+
+
 </mapper>

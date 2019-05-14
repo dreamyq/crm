@@ -32,13 +32,9 @@
     <result column="pay_time" property="payTime" jdbcType="TIMESTAMP" />
     <result column="amount" property="amount" jdbcType="VARCHAR" />
     <result column="is_refund" property="isRefund" jdbcType="VARCHAR" />
-    <result column="class_entry
-_time" property="classEntry
-Time" jdbcType="TIMESTAMP" />
+    <result column="class_entry_time" property="classEntryTime" jdbcType="TIMESTAMP" />
     <result column="is_class_entry" property="isClassEntry" jdbcType="VARCHAR" />
-    <result column="class_entry
-_remark" property="classEntry
-Remark" jdbcType="VARCHAR" />
+    <result column="class_entry_remark" property="classEntryRemark" jdbcType="VARCHAR" />
     <result column="refund_reason" property="refundReason" jdbcType="VARCHAR" />
     <result column="deposit_amount" property="depositAmount" jdbcType="VARCHAR" />
     <result column="deposit_time" property="depositTime" jdbcType="TIMESTAMP" />
@@ -152,18 +148,14 @@ Remark" jdbcType="VARCHAR" />
       <if test="isRefund != null" >
         is_refund,
       </if>
-      <if test="classEntry
-Time != null" >
-        class_entry
-_time,
+      <if test="classEntryTime != null" >
+        class_entry_time,
       </if>
       <if test="isClassEntry != null" >
         is_class_entry,
       </if>
-      <if test="classEntry
-Remark != null" >
-        class_entry
-_remark,
+      <if test="classEntryRemark != null" >
+        class_entry_remark,
       </if>
       <if test="refundReason != null" >
         refund_reason,
@@ -269,18 +261,14 @@ _remark,
       <if test="isRefund != null" >
         #{isRefund,jdbcType=VARCHAR},
       </if>
-      <if test="classEntry
-Time != null" >
-        #{classEntry
-Time,jdbcType=TIMESTAMP},
+      <if test="classEntryTime != null" >
+        #{classEntryTime,jdbcType=TIMESTAMP},
       </if>
       <if test="isClassEntry != null" >
         #{isClassEntry,jdbcType=VARCHAR},
       </if>
-      <if test="classEntry
-Remark != null" >
-        #{classEntry
-Remark,jdbcType=VARCHAR},
+      <if test="classEntryRemark != null" >
+        #{classEntryRemark,jdbcType=VARCHAR},
       </if>
       <if test="refundReason != null" >
         #{refundReason,jdbcType=VARCHAR},
@@ -345,7 +333,7 @@ Remark,jdbcType=VARCHAR},
       <if test="userId2 != null" >
         user_id2 = #{userId2,jdbcType=INTEGER},
       </if>
-      <if test="creatTime != null" >
+      <if test="creatTime != null and creatTime!=''" >
         creat_time = #{creatTime,jdbcType=TIMESTAMP},
       </if>
       <if test="area != null" >
@@ -363,13 +351,13 @@ Remark,jdbcType=VARCHAR},
       <if test="isVisit != null" >
         is_visit = #{isVisit,jdbcType=VARCHAR},
       </if>
-      <if test="firstVisitTime != null" >
+      <if test="firstVisitTime != null and firstVisitTime != ''" >
         first_visit_time = #{firstVisitTime,jdbcType=TIMESTAMP},
       </if>
       <if test="isDoor != null" >
         is_door = #{isDoor,jdbcType=VARCHAR},
       </if>
-      <if test="doorTime != null" >
+      <if test="doorTime != null and doorTime !=''" >
         door_time = #{doorTime,jdbcType=TIMESTAMP},
       </if>
       <if test="invalidReason != null" >
@@ -378,7 +366,7 @@ Remark,jdbcType=VARCHAR},
       <if test="isPay != null" >
         is_pay = #{isPay,jdbcType=VARCHAR},
       </if>
-      <if test="payTime != null" >
+      <if test="payTime != null and payTime != '' " >
         pay_time = #{payTime,jdbcType=TIMESTAMP},
       </if>
       <if test="amount != null" >
@@ -387,20 +375,14 @@ Remark,jdbcType=VARCHAR},
       <if test="isRefund != null" >
         is_refund = #{isRefund,jdbcType=VARCHAR},
       </if>
-      <if test="classEntry
-Time != null" >
-        class_entry
-_time = #{classEntry
-Time,jdbcType=TIMESTAMP},
+      <if test="classEntryTime != null and classEntryTime !='' " >
+        class_entry_time = #{classEntryTime,jdbcType=TIMESTAMP},
       </if>
       <if test="isClassEntry != null" >
         is_class_entry = #{isClassEntry,jdbcType=VARCHAR},
       </if>
-      <if test="classEntry
-Remark != null" >
-        class_entry
-_remark = #{classEntry
-Remark,jdbcType=VARCHAR},
+      <if test="classEntryRemark != null" >
+        class_entry_remark = #{classEntryRemark,jdbcType=VARCHAR},
       </if>
       <if test="refundReason != null" >
         refund_reason = #{refundReason,jdbcType=VARCHAR},
@@ -408,7 +390,7 @@ Remark,jdbcType=VARCHAR},
       <if test="depositAmount != null" >
         deposit_amount = #{depositAmount,jdbcType=VARCHAR},
       </if>
-      <if test="depositTime != null" >
+      <if test="depositTime != null and depositTime !=''" >
         deposit_time = #{depositTime,jdbcType=TIMESTAMP},
       </if>
       <if test="enteringName != null" >

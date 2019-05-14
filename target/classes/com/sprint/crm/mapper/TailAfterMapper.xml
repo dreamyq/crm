@@ -20,7 +20,7 @@
     from tail_after
     where id = #{id,jdbcType=INTEGER}
   </select>
-  
+   
   
   <insert id="insertSelective" parameterType="com.sprint.crm.pojo.TailAfter" >
     insert into tail_after
@@ -30,6 +30,9 @@
       </if>
       <if test="studentId != null" >
         student_id,
+      </if>
+       <if test="userId != null" >
+        user_id,
       </if>
       <if test="tailAfterTime != null" >
         tail_after_time,
@@ -53,6 +56,9 @@
       </if>
       <if test="studentId != null" >
         #{studentId,jdbcType=INTEGER},
+      </if>
+        <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
       </if>
       <if test="tailAfterTime != null" >
         #{tailAfterTime,jdbcType=TIMESTAMP},
@@ -98,5 +104,49 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
+ <select id="selectAll" resultType="com.sprint.crm.pojo.TailAfterExt">
+   select t.*,u.user_id,u.login_name,s.student_id,s.name from  tail_after t LEFT JOIN  students s ON t.student_id=s.student_id LEFT JOIN  user u on  t.user_id=u.user_id
+   <where>
+   <if test="t.name !=null and t.name !='' ">
+    s.name like "%"#{t.name}"%"
+   </if>
+   <if test="t.loginName!=null and t.loginName !=''">
+    and u.login_name =#{t.loginName}
+   </if>
+   <if test="beganTime !=null and beganTime!='' and endTime !=null and endTime !='' ">
+    and  t.tail_after_time between #{beganTime} and #{endTime}
+   </if>
+   <if test="t.remark !=null and t.remark !=''">
+  and   t.remark =#{t.remark}
+   </if>
+   <if test="t.tailAfterWay!=null and t.tailAfterWay!=''">
+  and  t.tail_after_way =#{t.tailAfterWay}
+   </if>
+   </where>
+   limit #{start},#{rows}
+ </select>
+ <select id="getCount" resultType="int">
+      select count(*) from  tail_after t LEFT JOIN  students s ON t.student_id=s.student_id LEFT JOIN  user u on  t.user_id=u.user_id
+     <where>
+   <if test="t.name !=null and t.name !='' ">
+    s.name like "%"#{t.name}"%"
+   </if>
+    <if test="t.loginName!=null and t.loginName !=''">
+    and u.login_name =#{t.loginName}
+   </if>
+   <if test="beganTime !=null and beganTime!='' and endTime !=null and endTime !='' ">
+    and  t.tail_after_time between #{beganTime} and #{endTime}
+   </if>
+   <if test="t.remark !=null and t.remark !=''">
+  and   t.remark =#{t.remark}
+   </if>
+   <if test="t.tailAfterWay!=null and t.tailAfterWay!=''">
+  and  t.tail_after_way =#{t.tailAfterWay}
+   </if>
+   </where>
+ </select>
+ <select id="selectUserId" resultType="com.sprint.crm.pojo.User">
  
+  select  *   from user
+ </select>
 </mapper>

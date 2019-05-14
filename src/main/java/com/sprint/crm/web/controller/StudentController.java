@@ -1,8 +1,12 @@
 package com.sprint.crm.web.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,6 +75,25 @@ public class StudentController {
 	@RequestMapping("deletes")
 	public Integer deletes(@Param("ids") String ids) {
 		return studentsService.deleteByStudentIds(ids);
+	}
+	@ResponseBody
+	@RequestMapping("add")
+	public Integer add(Students record,HttpSession session) {
+		//当添加学生的时候 创建添加时间
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		String creatTime=sdf.format(new Date());
+		record.setCreatTime(creatTime);
+		
+		  Integer userId1= (Integer) session.getAttribute("user_id");
+		  record.setUserId1(userId1);
+		
+		return studentsService.insertSelective(record);
+	}
+	@ResponseBody
+	@RequestMapping("update")
+	public Integer update(Students record) {
+		System.out.println(record.getName());
+		return studentsService.updateByPrimaryKeySelective(record);
 	}
 
 }

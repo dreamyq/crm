@@ -1,2 +1,7 @@
 eclipse.preferences.version=1
+encoding//src/main/java/com/sprint/crm/pojo/PageBean.java=UTF-8
+encoding//src/main/java/com/sprint/crm/pojo/RolesPageBean.java=UTF-8
+encoding//src/main/java/com/sprint/crm/web/controller/LoginController.java=UTF-8
+encoding//src/main/webapp/WEB-INF/html/tailAfter/TailAfter.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/html/user/changePassword.jsp=UTF-8
 encoding//src/test/java=UTF8

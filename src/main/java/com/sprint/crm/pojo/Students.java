@@ -55,13 +55,13 @@ public class Students extends StudentsExt {
 
     private String isPay;//是否缴费
 
-    private Date payTime;
+    private String payTime;//缴费时间
 
     private String amount;
 
     private String isRefund;
 
-    private Date classEntryTime;
+    private String classEntryTime;//进班时间
 
     private String isClassEntry;
 
@@ -71,7 +71,7 @@ public class Students extends StudentsExt {
 
     private String depositAmount;
 
-    private Date depositTime;
+    private String depositTime;//定金时间
 
     private String enteringName;
 
@@ -86,8 +86,8 @@ public class Students extends StudentsExt {
 			String sources, String sourceSite, String sourcekeyword, String qq, String weChat, String isReport,
 			String remark, Integer userId1, Integer userId2, String creatTime, String area, String course,
 			String isEffective, String scoring, String isVisit, String firstVisitTime, String isDoor, String doorTime,
-			String invalidReason, String isPay, Date payTime, String amount, String isRefund, Date classEntryTime,
-			String isClassEntry, String classEntryRemark, String refundReason, String depositAmount, Date depositTime,
+			String invalidReason, String isPay, String payTime, String amount, String isRefund, String classEntryTime,
+			String isClassEntry, String classEntryRemark, String refundReason, String depositAmount, String depositTime,
 			String enteringName, String dynamic) {
 		super();
 		this.studentId = studentId;
@@ -337,13 +337,7 @@ public class Students extends StudentsExt {
 		this.isPay = isPay;
 	}
 
-	public Date getPayTime() {
-		return payTime;
-	}
-
-	public void setPayTime(Date payTime) {
-		this.payTime = payTime;
-	}
+	
 
 	public String getAmount() {
 		return amount;
@@ -361,13 +355,7 @@ public class Students extends StudentsExt {
 		this.isRefund = isRefund;
 	}
 
-	public Date getClassEntryTime() {
-		return classEntryTime;
-	}
-
-	public void setClassEntryTime(Date classEntryTime) {
-		this.classEntryTime = classEntryTime;
-	}
+	
 
 	public String getIsClassEntry() {
 		return isClassEntry;
@@ -401,11 +389,29 @@ public class Students extends StudentsExt {
 		this.depositAmount = depositAmount;
 	}
 
-	public Date getDepositTime() {
+
+
+	public String getPayTime() {
+		return payTime;
+	}
+
+	public void setPayTime(String payTime) {
+		this.payTime = payTime;
+	}
+
+	public String getClassEntryTime() {
+		return classEntryTime;
+	}
+
+	public void setClassEntryTime(String classEntryTime) {
+		this.classEntryTime = classEntryTime;
+	}
+
+	public String getDepositTime() {
 		return depositTime;
 	}
 
-	public void setDepositTime(Date depositTime) {
+	public void setDepositTime(String depositTime) {
 		this.depositTime = depositTime;
 	}
 

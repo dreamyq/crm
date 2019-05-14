@@ -1,15 +1,15 @@
 package com.sprint.crm.service;
 
-import com.sprint.crm.pojo.Userroles;
+import com.sprint.crm.pojo.UserRoles;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface UserrolesService {
 
-	int insertSelective(Userroles record);
+	/*int insertSelective(UserRoles record);
 
-	Userroles selectByPrimaryKey(Integer id);
+	UserRoles selectByPrimaryKey(Integer id);
 
-	int updateByPrimaryKeySelective(Userroles record);
+	int updateByPrimaryKeySelective(UserRoles record);*/
 
 }

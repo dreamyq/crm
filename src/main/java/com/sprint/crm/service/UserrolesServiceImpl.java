@@ -1,33 +1,34 @@
 package com.sprint.crm.service;
 
-import javax.annotation.Resource;
 
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sprint.crm.mapper.UserrolesMapper;
-import com.sprint.crm.pojo.Userroles;
+import com.sprint.crm.pojo.UserRoles;
 
 @Service
 public class UserrolesServiceImpl implements UserrolesService {
-	@Resource
+	/*@Autowired
 	private UserrolesMapper userrolesMapper;
 
 	@Override
-	public int insertSelective(Userroles record) {
+	public int insertSelective(UserRoles record) {
 		// TODO Auto-generated method stub
 		return userrolesMapper.insertSelective(record);
 	}
 
 	@Override
-	public Userroles selectByPrimaryKey(Integer id) {
+	public UserRoles selectByPrimaryKey(Integer id) {
 		// TODO Auto-generated method stub
 		return userrolesMapper.selectByPrimaryKey(id);
 	}
 
 	@Override
-	public int updateByPrimaryKeySelective(Userroles record) {
+	public int updateByPrimaryKeySelective(UserRoles record) {
 		// TODO Auto-generated method stub
 		return userrolesMapper.updateByPrimaryKeySelective(record);
-	}
+	}*/
 
 }

@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sprint.crm.mapper.ModulesMapper" >
-  <resultMap id="BaseResultMap" type="com.sprint.crm.pojo.Modules" >
-    <id column="module_id" property="moduleId" jdbcType="INTEGER" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
-    <result column="path" property="path" jdbcType="VARCHAR" />
-    <result column="weight" property="weight" jdbcType="INTEGER" />
-  </resultMap>
+
     <sql id="Base_Column_List" >
     module_id, name, parent_id, path, weight
   </sql>
@@ -78,5 +72,55 @@
     </set>
     where module_id = #{moduleId,jdbcType=INTEGER}
   </update>
+  
+  <resultMap id="BaseResultMap" type="com.sprint.crm.pojo.Modules" >
+    <id column="module_id" property="moduleId" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+    <result column="path" property="path" jdbcType="VARCHAR" />
+    <result column="weight" property="weight" jdbcType="INTEGER" />
+  </resultMap>
+  <!--查询用户所拥有的模块-->
+  <select id="getModuleById" parameterType="int" resultMap="BaseResultMap">
+  SELECT
+		m.*
+		FROM
+		`user` u,userroles ur,rolemodules re,modules m WHERE u.user_id =
+		ur.user_id and
+		ur.role_id = re.role_id and re.module_id = m.module_id and u.user_id =
+		#{userId} ORDER BY m.weight desc
+  </select>
+  <select id="getModuleByChild" parameterType="int" resultMap="BaseResultMap">
+  	SELECT * from modules where module_id in
+		<foreach collection="list" item="item" open="(" close=")"
+			separator=",">
+			#{item}
+		</foreach>
+  </select>
+  <!--查询所有节点-->
+  <select id="getAllModule" resultMap="BaseResultMap">
+          select * from modules
+  </select>
+  	<!-- 查询子节点信息 -->
+	<select id="getModuleByChildId" parameterType="int" resultMap="BaseResultMap">
+			select * from modules where module_id = #{moduleId}
+	</select>
+	<insert id="insertModule">
+		insert into
+		modules(name,parent_id,path,weight) VALUES(#{1},#{0},#{2},#{3})
+	</insert>
+	<!-- 根据Id修改节点信息 -->
+	<update id="updateModule">
+		update modules set name = #{1} ,path = #{2},weight =
+		#{3} where module_id = #{0}
+	</update>
+	<!-- 删除节点 信息 -->
+	<delete id="delModule" parameterType="int">
+		delete from modules where module_id
+		= #{moduleId}
+	</delete>
+	<select id = "selectNameFromParent" resultType = "string" >
+		select name from Modules where parent_id = #{0}
+	</select>
  
 </mapper>
